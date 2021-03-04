@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<br/>
+<br/>
+<button class="reset" id="reset"><span>Reset</span></button>
+<div id="key-names">Touche = [ ];</div>
+    
+    <style>
+        body{
+            background-color:black;
+        }
+        .reset {
+  float: center;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.reset span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.reset span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.reset:hover span {
+  padding-right: 25px;
+}
+
+.reset:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+#key-names {
+    font-family: 'Montserrat', 'sans-serif';
+    text-align: center;
+  font-size: 10em;
+  color:white;
+}
+    </style>
+    <script>
+        var keyCodes = [];
+
+$("#reset").click(function() {
+  keyCodes = [];
+  $("#in").val("");
+  $("#key-codes").html("var keyCodes = [ ];");
+  $("#key-names").html("Touche = [ ];");
+});
+
+$(document).keydown(function(e) {
+  keyCodes.push(e.which);
+  updateOutput();
+});
+
+function updateOutput() {
+  var kC = "var keyCodes = [ ";
+  var kN = "Touche = [ ";
+
+  var len = keyCodes.length;
+
+  for (var i = 0; i < len; i++) {
+    kC += keyCodes[i];
+    kN += "'"+keyboardMap[keyCodes[i]]+"'";
+    if (i !== (len - 1)) {
+      kC += ", ";
+      kN += ", ";
+    }
+  }
+
+  kC += " ];";
+  kN += " ];";
+
+  $("#key-codes").html(kC);
+  $("#key-names").html(kN);
+}
+
+
+
+var keyboardMap = [
+  "", // [0]
+  "", // [1]
+  "", // [2]
+  "CANCEL", // [3]
+  "", // [4]
+  "", // [5]
+  "HELP", // [6]
+  "", // [7]
+  "BACK_SPACE", // [8]
+  "TAB", // [9]
+  "", // [10]
+  "", // [11]
+  "CLEAR", // [12]
+  "ENTER", // [13]
+  "ENTER_SPECIAL", // [14]
+  "", // [15]
+  "SHIFT", // [16]
+  "60", // [17]
+  "ALT", // [18]
+  "PAUSE", // [19]
+  "CAPS_LOCK", // [20]
+  "KANA", // [21]
+  "EISU", // [22]
+  "JUNJA", // [23]
+  "FINAL", // [24]
+  "HANJA", // [25]
+  "", // [26]
+  "ESCAPE", // [27]
+  "CONVERT", // [28]
+  "NONCONVERT", // [29]
+  "ACCEPT", // [30]
+  "MODECHANGE", // [31]
+  "SPACE", // [32]
+  "PAGE_UP", // [33]
+  "PAGE_DOWN", // [34]
+  "END", // [35]
+  "HOME", // [36]
+  "LEFT", // [37]
+  "UP", // [38]
+  "RIGHT", // [39]
+  "DOWN", // [40]
+  "SELECT", // [41]
+  "PRINT", // [42]
+  "EXECUTE", // [43]
+  "PRINTSCREEN", // [44]
+  "INSERT", // [45]
+  "DELETE", // [46]
+  "", // [47]
+  "NO KEY | 0", // [48]
+  "157", // [49]
+  "158", // [50]
+  "160", // [51]
+  "164", // [52]
+  "165", // [53]
+  "159", // [54]
+  "161", // [55]
+  "162", // [56]
+  "163", // [57]
+  "COLON", // [58]
+  "SEMICOLON", // [59]
+  "LESS_THAN", // [60]
+  "EQUALS", // [61]
+  "GREATER_THAN", // [62]
+  "QUESTION_MARK", // [63]
+  "AT", // [64]
+  "63", // [65]
+  "305", // [66]
+  "319", // [67]
+  "59", // [68]
+  "51", // [69]
+  "23", // [70]
+  "58", // [71]
+  "74", // [72]
+  "NO KEY | I", // [73]
+  "NO KEY | J", // [74]
+  "311", // [75]
+  "182", // [76]
+  "244", // [77]
+  "306", // [78]
+  "NO KEY | O", // [79]
+  "199", // [80]
+  "205", // [81]
+  "250", // [82]
+  "268", // [83]
+  "309", // [84]
+  "303", // [85]
+  "320", // [86]
+  "32", // [87]
+  "73", // [88]
+  "246", // [89]
+  "20", // [90]
+  "OS_KEY", // [91] Windows Key (Windows) or Command Key (Mac)
+  "", // [92]
+  "CONTEXT_MENU", // [93]
+  "", // [94]
+  "SLEEP", // [95]
+  "NUMPAD0", // [96]
+  "NUMPAD1", // [97]
+  "NUMPAD2", // [98]
+  "NUMPAD3", // [99]
+  "NUMPAD4", // [100]
+  "NUMPAD5", // [101]
+  "NUMPAD6", // [102]
+  "NUMPAD7", // [103]
+  "NUMPAD8", // [104]
+  "NUMPAD9", // [105]
+  "MULTIPLY", // [106]
+  "ADD", // [107]
+  "SEPARATOR", // [108]
+  "SUBTRACT", // [109]
+  "DECIMAL", // [110]
+  "DIVIDE", // [111]
+  "288", // [112]
+  "289", // [113]
+  "170", // [114]
+  "NO KEY", // [115]
+  "166", // [116]
+  "167", // [117]
+  "168", // [118]
+  "169", // [119]
+  "56", // [120]
+  "57", // [121]
+  "F11", // [122]
+  "F12", // [123]
+  "F13", // [124]
+  "F14", // [125]
+  "F15", // [126]
+  "F16", // [127]
+  "F17", // [128]
+  "F18", // [129]
+  "F19", // [130]
+  "F20", // [131]
+  "F21", // [132]
+  "F22", // [133]
+  "F23", // [134]
+  "F24", // [135]
+  "", // [136]
+  "", // [137]
+  "", // [138]
+  "", // [139]
+  "", // [140]
+  "", // [141]
+  "", // [142]
+  "", // [143]
+  "NUM_LOCK", // [144]
+  "SCROLL_LOCK", // [145]
+  "WIN_OEM_FJ_JISHO", // [146]
+  "WIN_OEM_FJ_MASSHOU", // [147]
+  "WIN_OEM_FJ_TOUROKU", // [148]
+  "WIN_OEM_FJ_LOYA", // [149]
+  "WIN_OEM_FJ_ROYA", // [150]
+  "", // [151]
+  "", // [152]
+  "", // [153]
+  "", // [154]
+  "", // [155]
+  "", // [156]
+  "", // [157]
+  "", // [158]
+  "", // [159]
+  "CIRCUMFLEX", // [160]
+  "EXCLAMATION", // [161]
+  "DOUBLE_QUOTE", // [162]
+  "HASH", // [163]
+  "DOLLAR", // [164]
+  "PERCENT", // [165]
+  "AMPERSAND", // [166]
+  "UNDERSCORE", // [167]
+  "OPEN_PAREN", // [168]
+  "CLOSE_PAREN", // [169]
+  "ASTERISK", // [170]
+  "PLUS", // [171]
+  "PIPE", // [172]
+  "HYPHEN_MINUS", // [173]
+  "OPEN_CURLY_BRACKET", // [174]
+  "CLOSE_CURLY_BRACKET", // [175]
+  "TILDE", // [176]
+  "", // [177]
+  "", // [178]
+  "", // [179]
+  "", // [180]
+  "VOLUME_MUTE", // [181]
+  "VOLUME_DOWN", // [182]
+  "VOLUME_UP", // [183]
+  "", // [184]
+  "", // [185]
+  "SEMICOLON", // [186]
+  "EQUALS", // [187]
+  "COMMA", // [188]
+  "MINUS", // [189]
+  "PERIOD", // [190]
+  "SLASH", // [191]
+  "BACK_QUOTE", // [192]
+  "", // [193]
+  "", // [194]
+  "", // [195]
+  "", // [196]
+  "", // [197]
+  "", // [198]
+  "", // [199]
+  "", // [200]
+  "", // [201]
+  "", // [202]
+  "", // [203]
+  "", // [204]
+  "", // [205]
+  "", // [206]
+  "", // [207]
+  "", // [208]
+  "", // [209]
+  "", // [210]
+  "", // [211]
+  "", // [212]
+  "", // [213]
+  "", // [214]
+  "", // [215]
+  "", // [216]
+  "", // [217]
+  "", // [218]
+  "OPEN_BRACKET", // [219]
+  "BACK_SLASH", // [220]
+  "CLOSE_BRACKET", // [221]
+  "QUOTE", // [222]
+  "", // [223]
+  "META", // [224]
+  "ALTGR", // [225]
+  "", // [226]
+  "WIN_ICO_HELP", // [227]
+  "WIN_ICO_00", // [228]
+  "", // [229]
+  "WIN_ICO_CLEAR", // [230]
+  "", // [231]
+  "", // [232]
+  "WIN_OEM_RESET", // [233]
+  "WIN_OEM_JUMP", // [234]
+  "WIN_OEM_PA1", // [235]
+  "WIN_OEM_PA2", // [236]
+  "WIN_OEM_PA3", // [237]
+  "WIN_OEM_WSCTRL", // [238]
+  "WIN_OEM_CUSEL", // [239]
+  "WIN_OEM_ATTN", // [240]
+  "WIN_OEM_FINISH", // [241]
+  "WIN_OEM_COPY", // [242]
+  "WIN_OEM_AUTO", // [243]
+  "WIN_OEM_ENLW", // [244]
+  "WIN_OEM_BACKTAB", // [245]
+  "ATTN", // [246]
+  "CRSEL", // [247]
+  "EXSEL", // [248]
+  "EREOF", // [249]
+  "PLAY", // [250]
+  "ZOOM", // [251]
+  "", // [252]
+  "PA1", // [253]
+  "WIN_OEM_CLEAR", // [254]
+  "" // [255]
+];
+    </script>
+</body>
+</html>
